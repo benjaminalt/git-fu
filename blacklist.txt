@@ -1,0 +1,15 @@
+build
+bin
+lib
+archive
+gtest
+dist
+dist_debug
+dependencies
+install-tmp
+docs
+win32
+include
+example
+cmake
+venvs

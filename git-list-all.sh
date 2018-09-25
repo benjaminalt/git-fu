@@ -1,18 +1,10 @@
 #!/bin/bash
 
+script_dir=`dirname "$0"`
+source $script_dir/blacklisted.sh
+
 contains() {
     [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && exit 0 || exit 1
-}
-
-function blacklisted()
-{
-    blacklist="build bin lib archive gtest dist dist_debug dependencies install-tmp docs win32 include example cmake venvs"
-    dirname="$(basename $1)"
-    if echo $blacklist | grep -w $dirname > /dev/null; then
-        #echo "$dirname blacklisted"
-        return 0
-    fi
-    return 1
 }
 
 function print_git_status()
@@ -48,7 +40,6 @@ fi
 root_dir="$(readlink -m $1)"
 
 export root_dir
-export blacklist
 export -f blacklisted
 export -f print_git_status
 find $root_dir -mindepth 1 -type d -exec bash -c 'cd "{}" && print_git_status' \; -prune
