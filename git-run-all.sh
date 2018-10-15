@@ -19,8 +19,7 @@ function git_apply_fn()
     if [ -d .git ]
     then
         echo
-        repo_name=`basename $working_dir`
-        echo "===== $repo_name =============================="
+        echo "===== $working_dir"
         eval "git $args"
         return 0
     fi
